@@ -1,0 +1,34 @@
+<meta author="Soap (Salih Muratović)" name="User system" version="1.0" description="A simple users system" />
+    <script src="base.lua" type="server" />
+    <script src="main.lua" type="server" />
+
+    <include resource="pdo" />
+
+    <!-- Base -->
+    <export function="setUserUsername" />
+    <export function="setUserPassword" />
+    <export function="setUserEmail" />
+    <export function="setUserNickname" />
+    <export function="setUserRank" />
+    <export function="setUserSerials" />
+    <export function="addUserSerial" />
+    <export function="setUserIps" />
+    <export function="addUserIp" />
+    <export function="getUserById" />
+    <export function="getUserByUsername" />
+    <export function="getUserByEmail" />
+    <export function="getUserByNickname" />
+    <export function="getUserUsername" />
+    <export function="getUserPassword" />
+    <export function="getUserEmail" />
+    <export function="getUserNickname" />
+    <export function="getUserRank" />
+    <export function="getUserSerials" />
+    <export function="getUserIps" />
+    <export function="getUserCreatedOn" />
+
+    <!-- Main -->
+    <export function="createUser" />
+    <export function="updateUser" />
+    <export function="deleteUser" />
+</meta>

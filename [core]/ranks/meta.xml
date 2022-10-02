@@ -1,0 +1,29 @@
+<meta author="Soap (Salih Muratović)" name="Ranks System" version="1.0" description="A simple ranks system with permissions" />
+    <script src="base.lua" type="server" />
+    <script src="main.lua" type="server" />
+
+    <include resource="pdo" />
+
+    <!-- Base -->
+    <export function="setRankPosition" />
+    <export function="setRankAlias" />
+    <export function="setRankName" />
+    <export function="setRankColor" />
+    <export function="setRankPermissions" />
+    <export function="setRankPermission" />
+    <export function="getRankById" />
+    <export function="getRankByPosition" />
+    <export function="getRankByAlias" />
+    <export function="getRankByName" />
+    <export function="getRankPosition" />
+    <export function="getRankAlias" />
+    <export function="getRankName" />
+    <export function="getRankColor" />
+    <export function="getRankPermissions" />
+    <export function="getRankPermission" />
+
+    <!-- Main -->
+    <export function="createRank" />
+    <export function="updateRank" />
+    <export function="deleteRank" />
+</meta>

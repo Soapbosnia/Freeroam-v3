@@ -1,0 +1,3 @@
+<meta author="Soap (Salih Muratović)" name="Resource Starter" version="1.0" description="A simple resource starter" />
+    <script src="server.lua" type="server" />
+</meta>
