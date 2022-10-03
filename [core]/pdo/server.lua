@@ -44,10 +44,6 @@ function valuesToString(data)
     return values:sub(1,-3)
 end
 
-function insertToString(data)
-
-end
-
 -------------
 -- Methods --
 -------------

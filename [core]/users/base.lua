@@ -8,7 +8,8 @@ local tableFields = {
     ["rank"] = "INT REFERENCES ranks(id)",
     ["serials"] = "TEXT",
     ["ips"] = "TEXT",
-    ["created_on"] = "TEXT"
+    ["created_on"] = "TEXT",
+    ["protected"] = "INT"
 }
 exports.pdo:create(tableName, tableFields)
 ----------
@@ -81,6 +82,13 @@ function addUserIp(user, ip)
     return {false, "Invalid arguments"}
 end
 
+function setUserProtected(user, protected)
+    if user then
+        return {true, exports.pdo.update(tableName, {protected = protected}, {id = user.id})}
+    end
+    return {false, "Invalid arguments"}
+end
+
 function getUserById(id)
     return exports.pdo.select(tableName, "*", {id = id})
 end
@@ -135,4 +143,9 @@ end
 function getUserCreatedOn(id)
     local user = getUserById(id)
     return return user.created_on
+end
+
+function isUserProtected(id)
+    local user = getUserById(id)
+    return return user.protected
 end

@@ -1,4 +1,4 @@
-function createUser(username, password, email, nickname, rank, serials, ips)
+function create(username, password, email, nickname, rank, serials, ips)
     if (username and password and email and nickname and rank and serials and ips) then
         local parameters = {
             username = username,
@@ -14,14 +14,14 @@ function createUser(username, password, email, nickname, rank, serials, ips)
     return {false, "Invalid arguments"}
 end
 
-function updateUser(id, key, value)
+function update(id, key, value)
     if (id and key and value) then
         return {true, exports.pdo.update(tableName, {[key] = value}, {id = id})}
     end
     return {false, "Invalid arguments"}
 end
 
-function deleteUser(id)
+function delete(id)
     if id then
         return {true, exports.pdo.delete(tableName, {id = id})}
     end

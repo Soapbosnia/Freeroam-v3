@@ -1,0 +1,17 @@
+[[
+    {
+        "username": "owner",
+        "password": "e731d2aa31218ceb917bd4db755498d4",
+        "email": "info@freeroam.ba",
+        "nickname": "Owner",
+        "rank": 1,
+        "serials": [
+          {"serial": "123456", "main": true}
+        ],
+        "ips": [
+          {"ip": "127.0.0.1", "main": true}
+        ],
+        "created_on": "1664824225120",
+        "protected": true
+    }
+]]

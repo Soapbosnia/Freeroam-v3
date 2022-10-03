@@ -96,8 +96,24 @@ function getRankPermissions(id)
     return fromJSON(rank.permissions)
 end
 
-function getRankPermission(id, permission)
+function hasRankPermission(id, permission)
     local rank = getRankById(id)
     local permissions = fromJSON(rank.permissions)
-    return permissions[permission]
+
+    if permissions["*"] then
+        return true
+    else
+        return permissions[permission]
+    end
 end
+
+addEventHandler("onResourceStart", resourceRoot, function()
+    local ranks = exports.pdo.select(tableName, "*", {})
+    if ranks then
+        exports.cache:set("ranks", ranks)
+    end
+end)
+
+addEventHandler("onResourceStop", resourceRoot, function()
+    exports.cache:clear("ranks")
+end)

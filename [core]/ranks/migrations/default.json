@@ -1,0 +1,27 @@
+[[
+    {
+        "position": 1,
+        "alias": "owner",
+        "name": "Owner",
+        "color": [200, 0, 0],
+        "permissions": {
+            "*": true
+        }
+    },
+    {
+        "position": 2,
+        "alias": "vip",
+        "name": "VIP",
+        "color": [0, 180, 0],
+        "permissions": {
+            "command.eject": true
+        }
+    },
+    {
+        "position": 3,
+        "alias": "player",
+        "name": "Player",
+        "color": [255, 255, 255],
+        "permissions": {}
+    }
+]]

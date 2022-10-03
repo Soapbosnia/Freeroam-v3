@@ -1,0 +1,7 @@
+<meta author="Soap (Salih Muratović)" name="Database Migrations" version="1.0" description="Database Migrations System" />
+    <script src="server.lua" type="server" />
+    
+    <export function="run" type="server" />
+    <export function="usesMigrations" type="server" />
+    <export function="check" type="server" />
+</meta>
