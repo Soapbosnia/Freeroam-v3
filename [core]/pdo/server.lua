@@ -1,8 +1,9 @@
 -------------------------------------|
--- Basic MySQL Wrapper for MTA       |
+-- Basic MySQL Wrapper for MTA:SA    |
 --| Created by Soapbosnia            |
 --| 02.10.2022                       |
 --| 19:10                            |
+--| Version 2.0 (03.10.2022 | 20:25) |
 -------------------------------------|
 local connection = dbConnect(
     "mysql", 
@@ -17,18 +18,22 @@ local connection = dbConnect(
 ------------------
 function generateWhereClause(data)
     local where=""
+    local values={}
     for k,v in pairs(data) do
-        where=where.."`"..k.."` = '"..v.."' AND "
+        where=where.."`"..k.."` = ? AND "
+        table.insert(values, v)
     end
-    return where:sub(1,-6)
+    return where:sub(1,-6),values
 end
 
 function generateSetClause(data)
     local set=""
+    local values={}
     for k,v in pairs(data) do
-        set=set.."`"..k.."` = '"..v.."', "
+        set=set.."`"..k.."` = ?, "
+        table.insert(values, v)
     end
-    return set:sub(1,-3)
+    return set:sub(1,-3),values
 end
 
 function valuesToString(data)
@@ -37,6 +42,10 @@ function valuesToString(data)
         values=values.."`"..k.."` "..v..", "
     end
     return values:sub(1,-3)
+end
+
+function insertToString(data)
+
 end
 
 -------------
@@ -56,34 +65,41 @@ end
 function insert(table,data)
     local columns=""
     local values=""
+    local actualValues={}
     for k,v in pairs(data) do
         columns=columns.."`"..k.."`, "
-        values=values.."'"..v.."', "
+        values=values.."?, "
+        table.insert(actualValues, v)
     end
     columns=columns:sub(1,-3)
     values=values:sub(1,-3)
     local query="INSERT INTO `"..table.."` ("..columns..") VALUES ("..values..")"
-    return dbExec(connection,query)
+    return dbExec(connection,query,unpack(actualValues))
 end
 
 function select(table, select, where)
     local select=select or "*"
-    local query="SELECT `"..select.."` FROM `".. table.."` WHERE "..generateWhereClause(where)
-    return dbPoll(dbQuery(connection,query),-1)
+    local where,values=generateWhereClause(where)
+    local query="SELECT `"..select.."` FROM `".. table.."` WHERE "..where
+    return dbPoll(dbQuery(connection,query,unpack(values)),-1)
 end
 
 function selectJoin(table1, table2, joinType, fields, select, where)
     local select=select or "*"
-    local query="SELECT `"..select.."` FROM `".. table1.."` "..joinType.." `"..table2.."` ON `"..table1.."`.`"..fields[1].."` = `"..table2.."`.`"..fields[2].."` WHERE "..generateWhereClause(where)
-    return dbPoll(dbQuery(connection,query),-1)
+    local where,values=generateWhereClause(where)
+    local query="SELECT `"..select.."` FROM `".. table1.."` "..joinType.." `"..table2.."` ON `"..table1.."`.`"..fields[1].."` = `"..table2.."`.`"..fields[2].."` WHERE "..where
+    return dbPoll(dbQuery(connection,query,values),-1)
 end
 
 function update(table, set, where)
-    local query="UPDATE `"..table.."` SET "..generateSetClause(set).." WHERE "..generateWhereClause(where)
-    return dbExec(connection,query)
+    local set,setValues=generateSetClause(set)
+    local where,whereValues=generateWhereClause(where)
+    local query="UPDATE `"..table.."` SET "..set.." WHERE "..where
+    return dbExec(connection,query,unpack(setValues),unpack(whereValues))
 end
 
 function delete(table, where)
-    local query="DELETE FROM `"..table.."` WHERE "..generateWhereClause(where)
-    return dbExec(connection,query)
+    local where,values=generateWhereClause(where)
+    local query="DELETE FROM `"..table.."` WHERE "..where
+    return dbExec(connection,query,where)
 end
