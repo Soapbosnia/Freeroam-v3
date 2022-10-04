@@ -6,7 +6,8 @@
         "color": [200, 0, 0],
         "permissions": {
             "*": true
-        }
+        },
+        "default": false
     },
     {
         "position": 2,
@@ -15,13 +16,15 @@
         "color": [0, 180, 0],
         "permissions": {
             "command.eject": true
-        }
+        },
+        "default": false
     },
     {
         "position": 3,
         "alias": "player",
         "name": "Player",
         "color": [255, 255, 255],
-        "permissions": {}
+        "permissions": {},
+        "default": true
     }
 ]]
