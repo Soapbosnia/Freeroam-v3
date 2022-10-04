@@ -110,7 +110,7 @@ end
 addEventHandler("onResourceStart", resourceRoot, function()
     local ranks = exports.pdo.select(tableName, "*", {})
     if ranks then
-        exports.cache:set("ranks", ranks)
+        exports.cache:set("ranks", "list", ranks)
     end
 end)
 
