@@ -11,6 +11,7 @@
     <export function="setRankColor" type="server" />
     <export function="setRankPermissions" type="server" />
     <export function="setRankPermission" type="server" />
+    <export function="setRankDefault" type="server" />
     <export function="getRankById" type="server" />
     <export function="getRankByPosition" type="server" />
     <export function="getRankByAlias" type="server" />
@@ -21,9 +22,11 @@
     <export function="getRankColor" type="server" />
     <export function="getRankPermissions" type="server" />
     <export function="getRankPermission" type="server" />
+    <export function="isRankDefault" type="server" />
 
     <!-- Main -->
     <export function="create" type="server" />
     <export function="update" type="server" />
     <export function="delete" type="server" />
+    <export function="getDefault" type="server" />
 </meta>

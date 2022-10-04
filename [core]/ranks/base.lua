@@ -5,7 +5,8 @@ local tableFields = {
     ["alias"] = "TEXT",
     ["name"] = "TEXT",
     ["color"] = "TEXT",
-    ["permissions"] = "TEXT"
+    ["permissions"] = "TEXT",
+    ["default"] = "INT"
 }
 exports.pdo:create(tableName, tableFields)
 -------------
@@ -13,35 +14,35 @@ exports.pdo:create(tableName, tableFields)
 -------------
 function setRankPosition(rank, position)
     if (rank and position) then
-        return {true, exports.pdo.update(tableName, {position = position}, {id = rank.id})}
+        return {true, exports.pdo:update(tableName, {position = position}, {id = rank.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankAlias(rank, alias)
     if (rank and alias) then
-        return {true, exports.pdo.update(tableName, {alias = alias}, {id = rank.id})}
+        return {true, exports.pdo:update(tableName, {alias = alias}, {id = rank.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankName(rank, name)
     if (rank and name) then
-        return {true, exports.pdo.update(tableName, {name = name}, {id = rank.id})}
+        return {true, exports.pdo:update(tableName, {name = name}, {id = rank.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankColor(rank, color)
     if (rank and color) then
-        return {true, exports.pdo.update(tableName, {color = toJSON(color)}, {id = rank.id})}
+        return {true, exports.pdo:update(tableName, {color = toJSON(color)}, {id = rank.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankPermissions(rank, permissions)
     if (rank and permissions) then
-        return {true, exports.pdo.update(tableName, {permissions = toJSON(permissions)}, {id = rank.id})}
+        return {true, exports.pdo:update(tableName, {permissions = toJSON(permissions)}, {id = rank.id})}
     end
     return {false, "Invalid arguments"}
 end
@@ -55,20 +56,27 @@ function setRankPermission(rank, permission, value)
     return {false, "Invalid arguments"}
 end
 
+function setRankDefault(rank, default)
+    if rank then
+        return {true, exports.pdo:update(tableName, {default = default}, {id = rank.id})}
+    end
+    return {false, "Invalid arguments"}
+end
+
 function getRankById(id)
-    return exports.pdo.select(tableName, "*", {id = id})
+    return exports.pdo:select(tableName, "*", {id = id})
 end
 
 function getRankByPosition(position)
-    return exports.pdo.select(tableName, "*", {position = position})
+    return exports.pdo:select(tableName, "*", {position = position})
 end
 
 function getRankByAlias(alias)
-    return exports.pdo.select(tableName, "*", {alias = alias})
+    return exports.pdo:select(tableName, "*", {alias = alias})
 end
 
 function getRankByName(name)
-    return exports.pdo.select(tableName, "*", {name = name})
+    return exports.pdo:select(tableName, "*", {name = name})
 end
 
 function getRankAlias(id)
@@ -107,10 +115,17 @@ function hasRankPermission(id, permission)
     end
 end
 
+function isRankDefault(id)
+    local rank = getRankById(id)
+    return rank.default == 1
+end
+
 addEventHandler("onResourceStart", resourceRoot, function()
-    local ranks = exports.pdo.select(tableName, "*", {})
+    local ranks = exports.pdo:select(tableName, "*", {})
+    local default = exports.pdo:select(tableName, "*", {default = 1})
     if ranks then
         exports.cache:set("ranks", "list", ranks)
+        exports.cache:set("ranks", "default", default)
     end
 end)
 
