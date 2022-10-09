@@ -84,7 +84,7 @@ function selectJoin(table1, table2, joinType, fields, select, where)
     local select=select or "*"
     local where,values=generateWhereClause(where)
     local query="SELECT `"..select.."` FROM `".. table1.."` "..joinType.." `"..table2.."` ON `"..table1.."`.`"..fields[1].."` = `"..table2.."`.`"..fields[2].."` WHERE "..where
-    return dbPoll(dbQuery(connection,query,values),-1)
+    return dbPoll(dbQuery(connection,query,unpack(values)),-1)
 end
 
 function update(table, set, where)
@@ -97,5 +97,5 @@ end
 function delete(table, where)
     local where,values=generateWhereClause(where)
     local query="DELETE FROM `"..table.."` WHERE "..where
-    return dbExec(connection,query,where)
+    return dbExec(connection,query,unpack(values))
 end
