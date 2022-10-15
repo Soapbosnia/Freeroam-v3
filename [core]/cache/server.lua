@@ -11,7 +11,7 @@ function get(element, key)
     if (cache[element]) then
         return {true, cache[element][key]}
     end
-    return {nil, "Cache storage for this element does not exist"}
+    return {nil, "Cache storage for the specified element does not exist"}
 end
 
 function clear(element, key)
