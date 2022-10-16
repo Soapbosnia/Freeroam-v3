@@ -1,6 +1,6 @@
 local priority = {
-    "migrations"
-    "cache"
+    "migrations",
+    "cache",
     "pdo",
     "ranks",
     "users"
