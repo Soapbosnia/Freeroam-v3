@@ -1,4 +1,5 @@
-<meta author="Soap (Salih Muratović)" name="MySQL Wrapper" version="1.0" description="A simple MySQL Wrapper for MTA:SA" />
+<meta>
+    <info author="Soap (Salih Muratović)" name="MySQL Wrapper" version="1.0" description="A simple MySQL Wrapper for MTA:SA" />
     <script src="server.lua" type="server" />
 
     <export function="create" />

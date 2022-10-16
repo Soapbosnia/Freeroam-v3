@@ -1,4 +1,5 @@
-<meta author="Soap (Salih Muratović)" name="Ranks System" version="1.0" description="A simple ranks system with permissions" migrations="true" />
+<meta>
+    <info author="Soap (Salih Muratović)" name="Ranks System" version="1.0" description="A simple ranks system with permissions" migrations="true" />
     <script src="base.lua" type="server" />
     <script src="main.lua" type="server" />
 

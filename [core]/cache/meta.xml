@@ -1,4 +1,5 @@
-<meta author="Soap (Salih Muratović)" name="Cache System" version="1.0" description="A simple cache system" />
+<meta>
+    <info author="Soap (Salih Muratović)" name="Cache System" version="1.0" description="A simple cache system" />
     <script src="server.lua" type="server" />
 
     <export function="set" type="server" />

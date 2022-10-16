@@ -23,27 +23,10 @@ function run(script, file)
 end
 
 function usesMigrations(script)
-    local handle = fileOpen(":"..script.."/meta.xml")
-
+    local handle = fileOpen(":"..script.."/migrations/default.json")
     if handle then
-        local size = fileGetSize(handle)
-        local data = fileRead(handle, size)
-
-        if data then
-            local xml = xmlLoadString(data)
-
-            if xml then
-                local migrations = xmlNodeGetAttribute(xml, "migrations")
-
-                if migrations then
-                    if (migrations == "true") then
-                        fileClose(handle)
-                        return true
-                    end
-                end
-            end
-        end
         fileClose(handle)
+        return true
     end
     return false
 end
