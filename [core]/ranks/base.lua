@@ -1,6 +1,6 @@
 local tableName = "ranks"
 local tableFields = {
-    ["id"] = "INT PRIMARY KEY AUTOINCREMENT",
+    ["id"] = "INT PRIMARY KEY AUTO_INCREMENT",
     ["position"] = "INT",
     ["alias"] = "TEXT",
     ["name"] = "TEXT",

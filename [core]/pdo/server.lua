@@ -7,7 +7,7 @@
 -------------------------------------|
 local connection = dbConnect(
     "mysql", 
-    "dbname=mtadev;host=localhost;port=3306;charset=utf8mb4_general_ci", 
+    "dbname=mtadev;host=localhost;port=3306;charset=utf8", 
     "root",
     "",
     "share=1"
@@ -76,7 +76,10 @@ end
 function select(table, select, where)
     local select=select or "*"
     local where,values=generateWhereClause(where)
-    local query="SELECT `"..select.."` FROM `".. table.."` WHERE "..where
+    local query="SELECT "..select.." FROM `".. table.."`"
+    if(#values > 0) then
+        query = query.." WHERE "..where
+    end
     return dbPoll(dbQuery(connection,query,unpack(values)),-1)
 end
 

@@ -23,9 +23,8 @@ function run(script, file)
 end
 
 function usesMigrations(script)
-    local handle = fileOpen(":"..script.."/migrations/default.json")
-    if handle then
-        fileClose(handle)
+    local exists = fileExists(":"..script.."/migrations/default.json")
+    if exists then
         return true
     end
     return false

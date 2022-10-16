@@ -1,6 +1,6 @@
 local tableName = "users"
 local tableFields = {
-    ["id"] = "INT PRIMARY KEY AUTOINCREMENT",
+    ["id"] = "INT PRIMARY KEY AUTO_INCREMENT",
     ["username"] = "TEXT",
     ["password"] = "TEXT",
     ["email"] = "TEXT",
@@ -107,45 +107,45 @@ end
 
 function getUserUsername(id)
     local user = getUserById(id)
-    return return user.username
+    return user.username
 end
 
 function getUserPassword(id)
     local user = getUserById(id)
-    return return user.password
+    return user.password
 end
 
 function getUserEmail(id)
     local user = getUserById(id)
-    return return user.email
+    return user.email
 end
 
 function getUserNickname(id)
     local user = getUserById(id)
-    return return user.nickname
+    return user.nickname
 end
 
 function getUserRank(id)
     local user = getUserById(id)
-    return return user.rank
+    return user.rank
 end
 
 function getUserSerials(id)
     local user = getUserById(id)
-    return return fromJSON(user.serials)
+    return fromJSON(user.serials)
 end
 
 function getUserIps(id)
     local user = getUserById(id)
-    return return fromJSON(user.ips)
+    return fromJSON(user.ips)
 end
 
 function getUserCreatedOn(id)
     local user = getUserById(id)
-    return return user.created_on
+    return user.created_on
 end
 
 function isUserProtected(id)
     local user = getUserById(id)
-    return return user.protected
+    return user.protected
 end

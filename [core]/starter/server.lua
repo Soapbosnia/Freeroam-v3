@@ -6,7 +6,7 @@ local priority = {
     "users"
 }
 
-local function table.find(haystack, needle)
+local function tableFind(haystack, needle)
     for key, value in ipairs(haystack) do
         if (value == needle) then
             return i
@@ -26,7 +26,7 @@ local function getSortedResources(resources)
         end
     end
     for key, resource in ipairs(resources) do
-        if (not table.find(all, resource)) then
+        if (not tableFind(all, resource)) then
             table.insert(all, resource)
         end
     end
