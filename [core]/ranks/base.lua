@@ -1,12 +1,12 @@
 local tableName = "ranks"
 local tableFields = {
-    ["id"] = "INT PRIMARY KEY AUTO_INCREMENT",
-    ["position"] = "INT",
-    ["alias"] = "TEXT",
-    ["name"] = "TEXT",
-    ["color"] = "TEXT",
-    ["permissions"] = "TEXT",
-    ["default"] = "INT"
+    {"id", "INT PRIMARY KEY AUTO_INCREMENT"},
+    {"position", "INT"},
+    {"alias", "TEXT"},
+    {"name", "TEXT"},
+    {"color", "TEXT"},
+    {"permissions", "TEXT"},
+    {"default", "INT"}
 }
 exports.pdo:create(tableName, tableFields)
 -------------

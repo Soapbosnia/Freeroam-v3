@@ -38,8 +38,8 @@ end
 
 function valuesToString(data)
     local values=""
-    for k,v in pairs(data) do
-        values=values.."`"..k.."` "..v..", "
+    for k,v in ipairs(data) do
+        values=values.."`"..v[1].."` "..v[2]..", "
     end
     return values:sub(1,-3)
 end

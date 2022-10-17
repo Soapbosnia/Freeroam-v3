@@ -1,15 +1,15 @@
 local tableName = "users"
 local tableFields = {
-    ["id"] = "INT PRIMARY KEY AUTO_INCREMENT",
-    ["username"] = "TEXT",
-    ["password"] = "TEXT",
-    ["email"] = "TEXT",
-    ["nickname"] = "TEXT",
-    ["rank"] = "INT REFERENCES ranks(id)",
-    ["serials"] = "TEXT",
-    ["ips"] = "TEXT",
-    ["created_on"] = "TEXT",
-    ["protected"] = "INT"
+    {"id", "INT PRIMARY KEY AUTO_INCREMENT"},
+    {"username", "TEXT"},
+    {"password", "TEXT"},
+    {"email", "TEXT"},
+    {"nickname", "TEXT"},
+    {"rank", "INT REFERENCES ranks(id)"},
+    {"serials", "TEXT"},
+    {"ips", "TEXT"},
+    {"created_on", "TEXT"},
+    {"protected", "INT"}
 }
 exports.pdo:create(tableName, tableFields)
 ----------
