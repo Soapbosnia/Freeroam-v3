@@ -60,7 +60,7 @@ end
 function addUserSerial(user, serial)
     if (user and serial) then
         local serials = fromJSON(user.serials)
-        table.insert(serials, serial)
+        table.insert(serials, {serial = serial, default = false})
         return setUserSerials(user, serials)
     end
     return {false, "Invalid arguments"}
@@ -76,7 +76,7 @@ end
 function addUserIp(user, ip)
     if (user and ip) then
         local ips = fromJSON(user.ips)
-        table.insert(ips, ip)
+        table.insert(ips, {ip = ip, default = false})
         return setUserIps(user, ips)
     end
     return {false, "Invalid arguments"}
@@ -90,19 +90,19 @@ function setUserProtected(user, protected)
 end
 
 function getUserById(id)
-    return exports.pdo:select(tableName, "*", {id = id})
+    return exports.pdo:select(tableName, "*", {id = id})[1]
 end
 
 function getUserByUsername(username)
-    return exports.pdo:select(tableName, "*", {username = username})
+    return exports.pdo:select(tableName, "*", {username = username})[1]
 end
 
 function getUserByEmail(email)
-    return exports.pdo:select(tableName, "*", {email = email})
+    return exports.pdo:select(tableName, "*", {email = email})[1]
 end
 
 function getUserByNickname(nickname)
-    return exports.pdo:select(tableName, "*", {nickname = nickname})
+    return exports.pdo:select(tableName, "*", {nickname = nickname})[1]
 end
 
 function getUserUsername(id)

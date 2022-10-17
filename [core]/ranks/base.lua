@@ -64,19 +64,19 @@ function setRankDefault(rank, default)
 end
 
 function getRankById(id)
-    return exports.pdo:select(tableName, "*", {id = id})
+    return exports.pdo:select(tableName, "*", {id = id})[1]
 end
 
 function getRankByPosition(position)
-    return exports.pdo:select(tableName, "*", {position = position})
+    return exports.pdo:select(tableName, "*", {position = position})[1]
 end
 
 function getRankByAlias(alias)
-    return exports.pdo:select(tableName, "*", {alias = alias})
+    return exports.pdo:select(tableName, "*", {alias = alias})[1]
 end
 
 function getRankByName(name)
-    return exports.pdo:select(tableName, "*", {name = name})
+    return exports.pdo:select(tableName, "*", {name = name})[1]
 end
 
 function getRankAlias(id)

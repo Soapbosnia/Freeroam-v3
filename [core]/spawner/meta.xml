@@ -1,0 +1,10 @@
+<meta>
+    <info author="Soap (Salih Muratović)" name="Player spawn system" version="1.0" description="A simple player spawner" />
+    <script src="server.lua" type="server" />
+
+    <!-- Exports -->
+    <export function="loadPlayer" type="server" />
+    <export function="getSpawnpoints" type="server" />
+    <export function="getRandomSpawnpoint" type="server" />
+    <export function="getNearestSpawnpoint" type="server" />
+</meta>

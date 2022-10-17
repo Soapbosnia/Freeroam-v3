@@ -58,18 +58,18 @@ function drop(table)
     return dbExec(connection,query)
 end
 
-function insert(table,data)
+function insert(tableName,data)
     local columns=""
     local values=""
     local actualValues={}
-    for k,v in pairs(data) do
-        columns=columns.."`"..k.."`, "
+    for k,v in ipairs(data) do
+        columns=columns.."`"..v[1].."`, "
         values=values.."?, "
-        table.insert(actualValues, v)
+        table.insert(actualValues, v[2])
     end
     columns=columns:sub(1,-3)
     values=values:sub(1,-3)
-    local query="INSERT INTO `"..table.."` ("..columns..") VALUES ("..values..")"
+    local query="INSERT INTO `"..tableName.."` ("..columns..") VALUES ("..values..")"
     return dbExec(connection,query,unpack(actualValues))
 end
 

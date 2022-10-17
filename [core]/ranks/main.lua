@@ -1,6 +1,14 @@
 function create(position, alias, name, color, permissions, default)
     if (position and alias and name and color and permissions) then
-        return {true, exports.pdo:insert(tableName, {position = position, alias = alias, name = name, color = toJSON(color), permissions = toJSON(permissions), default = default})}
+        local parameters = {
+            {"position", position},
+            {"alias", alias},
+            {"name", name},
+            {"color", toJSON(color)},
+            {"permissions", toJSON(permissions)},
+            {"default", default}
+        }
+        return {true, exports.pdo:insert(tableName, parameters)}
     end
     return {false, "Invalid arguments"}
 end

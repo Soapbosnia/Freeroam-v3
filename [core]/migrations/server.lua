@@ -11,10 +11,12 @@ function run(script, file)
             if data then
                 local data = fromJSON(data)
 
-                for key, value in pairs(data) do
-                    fileClose(handle)
-                    return {true, exports[script]:create(unpack(value))}
+                for key, value in ipairs(data) do
+                    call(getResourceFromName(script), "create", unpack(value))
                 end
+                fileClose(handle)
+
+                return {true, "Successfully ran migration"}
             end
             fileClose(handle)
         end
@@ -55,15 +57,15 @@ end
 local function migrateCommand(player, command, script, file)
     if script then
         if type(player == "string") then
-            if (player == "Console") then
+            if (getPlayerName(player) == "Console") then
                 if (not usesMigrations(script)) then
-                    return outputConsole("The resource "..script.." does not use migrations")
+                    return outputDebugString("The resource "..script.." does not use migrations")
                 end
                 local result = run(script, file)
                 if result[1] then
-                    outputConsole("[Migrations|("..script..")] Migration successful!")
+                    outputDebugString("[Migrations|("..script..")] Migration successful!")
                 else
-                    outputConsole("[Migrations|("..script..")] Migration failed: "..result[2])
+                    outputDebugString("[Migrations|("..script..")] Migration failed: "..result[2])
                 end
             end
         else

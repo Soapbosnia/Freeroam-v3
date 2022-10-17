@@ -1,5 +1,6 @@
 <meta>
     <info author="Soap (Salih Muratović)" name="User system" version="1.0" description="A simple users system" migrations="true" />
+    <script src="helpers/helper.lua" type="server" />
     <script src="base.lua" type="server" />
     <script src="main.lua" type="server" />
     <script src="player.lua" type="server" />
