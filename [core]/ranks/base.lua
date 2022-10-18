@@ -14,35 +14,35 @@ exports.sql:create(tableName, tableFields)
 -------------
 function setRankPosition(rank, position)
     if (rank and position) then
-        return {true, exports.sql:update(tableName, {position = position}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"position", position}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankAlias(rank, alias)
     if (rank and alias) then
-        return {true, exports.sql:update(tableName, {alias = alias}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"alias", alias}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankName(rank, name)
     if (rank and name) then
-        return {true, exports.sql:update(tableName, {name = name}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"name", name}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankColor(rank, color)
     if (rank and color) then
-        return {true, exports.sql:update(tableName, {color = toJSON(color)}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"color", toJSON(color)}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setRankPermissions(rank, permissions)
     if (rank and permissions) then
-        return {true, exports.sql:update(tableName, {permissions = toJSON(permissions)}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"permissions", toJSON(permissions)}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
@@ -58,25 +58,25 @@ end
 
 function setRankDefault(rank, default)
     if rank then
-        return {true, exports.sql:update(tableName, {default = default}, {id = rank.id})}
+        return {true, exports.sql:update(tableName, {{"default", default}}, {{"id", rank.id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function getRankById(id)
-    return exports.sql:select(tableName, "*", {id = id})[1]
+    return exports.sql:select(tableName, "*", {{"id", id}})[1]
 end
 
 function getRankByPosition(position)
-    return exports.sql:select(tableName, "*", {position = position})[1]
+    return exports.sql:select(tableName, "*", {{"position", position}})[1]
 end
 
 function getRankByAlias(alias)
-    return exports.sql:select(tableName, "*", {alias = alias})[1]
+    return exports.sql:select(tableName, "*", {{"alias", alias}})[1]
 end
 
 function getRankByName(name)
-    return exports.sql:select(tableName, "*", {name = name})[1]
+    return exports.sql:select(tableName, "*", {{"name", name}})[1]
 end
 
 function getRankAlias(id)
@@ -122,7 +122,7 @@ end
 
 addEventHandler("onResourceStart", resourceRoot, function()
     local ranks = exports.sql:select(tableName, "*", {})
-    local default = exports.sql:select(tableName, "*", {default = 1})
+    local default = exports.sql:select(tableName, "*", {{"default", 1}})[1]
     if ranks then
         exports.cache:set("ranks", "list", ranks)
         exports.cache:set("ranks", "default", default)

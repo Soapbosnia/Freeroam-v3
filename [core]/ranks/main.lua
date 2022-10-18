@@ -15,24 +15,20 @@ end
 
 function update(id, key, value)
     if (id and key and value) then
-        return {true, exports.sql:update(tableName, {[key] = value}, {id = id})}
+        return {true, exports.sql:update(tableName, {{key, value}}, {{"id", id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function delete(id)
     if id then
-        return {true, exports.sql:delete(tableName, {id = id})}
+        return {true, exports.sql:delete(tableName, {{"id", id}})}
     end
     return {false, "Invalid arguments"}
 end
 
 function getDefault()
     local inCache = exports.cache:get("ranks", "default")
-    if inCache then
-        return inCache
-    else
-        local result = exports.sql:select("ranks", "*", {default = 1})
-        return result
-    end
+    local result = inCache or exports.sql:select(tableName, "*", {{"default", 1}})[1]
+    return result
 end
