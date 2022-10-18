@@ -1,7 +1,9 @@
 local tableName = "users"
 
-function create(username, password, email, nickname, rank, serials, ips)
+function create(username, password, email, nickname, rank, serials, ips, created_on, protected)
     if (username and password and email and nickname and rank and serials and ips) then
+        local created_on = created_on or getTimestamp()
+        local protected = protected or 0
         local parameters = {
             {"username", username},
             {"password", md5(password)},
@@ -10,8 +12,8 @@ function create(username, password, email, nickname, rank, serials, ips)
             {"rank", rank.id},
             {"serials", toJSON(serials)},
             {"ips", toJSON(ips)},
-            {"created_on", getTimestamp()},
-            {"protected", 0}
+            {"created_on", created_on},
+            {"protected", protected}
         }
         return {true, exports.pdo:insert(tableName, parameters)}
     end
