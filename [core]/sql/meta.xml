@@ -1,0 +1,12 @@
+<meta>
+    <info author="Soap (Salih Muratović)" name="MySQL Wrapper" version="1.0" description="A simple MySQL Wrapper for MTA:SA" />
+    <script src="server.lua" type="server" />
+
+    <export function="create" />
+    <export function="drop" />
+    <export function="insert" />
+    <export function="select" />
+    <export function="selectJoin" />
+    <export function="update" />
+    <export function="delete" />
+</meta>

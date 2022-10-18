@@ -8,21 +8,21 @@ function create(position, alias, name, color, permissions, default)
             {"permissions", toJSON(permissions)},
             {"default", default}
         }
-        return {true, exports.pdo:insert(tableName, parameters)}
+        return {true, exports.sql:insert(tableName, parameters)}
     end
     return {false, "Invalid arguments"}
 end
 
 function update(id, key, value)
     if (id and key and value) then
-        return {true, exports.pdo:update(tableName, {[key] = value}, {id = id})}
+        return {true, exports.sql:update(tableName, {[key] = value}, {id = id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function delete(id)
     if id then
-        return {true, exports.pdo:delete(tableName, {id = id})}
+        return {true, exports.sql:delete(tableName, {id = id})}
     end
     return {false, "Invalid arguments"}
 end
@@ -32,7 +32,7 @@ function getDefault()
     if inCache then
         return inCache
     else
-        local result = exports.pdo:select("ranks", "*", {default = 1})
+        local result = exports.sql:select("ranks", "*", {default = 1})
         return result
     end
 end

@@ -11,48 +11,48 @@ local tableFields = {
     {"created_on", "TEXT"},
     {"protected", "INT"}
 }
-exports.pdo:create(tableName, tableFields)
+exports.sql:create(tableName, tableFields)
 ----------
 -- Methods
 ----------
 function setUserUsername(user, username)
     if (user and username) then
-        return {true, exports.pdo:update(tableName, {username = username}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {username = username}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setUserPassword(user, password)
     if (user and password) then
-        return {true, exports.pdo:update(tableName, {password = password}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {password = password}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setUserEmail(user, email)
     if (user and email) then
-        return {true, exports.pdo:update(tableName, {email = email}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {email = email}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setUserNickname(user, nickname)
     if (user and nickname) then
-        return {true, exports.pdo:update(tableName, {nickname = nickname}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {nickname = nickname}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setUserRank(user, rank)
     if (user and rank) then
-        return {true, exports.pdo:update(tableName, {rank = rank.id}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {rank = rank.id}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function setUserSerials(user, serials)
     if (user and serials) then
-        return {true, exports.pdo:update(tableName, {serials = toJSON(serials)}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {serials = toJSON(serials)}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
@@ -68,7 +68,7 @@ end
 
 function setUserIps(user, ips)
     if (user and ips) then
-        return {true, exports.pdo:update(tableName, {ips = toJSON(ips)}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {ips = toJSON(ips)}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
@@ -84,25 +84,25 @@ end
 
 function setUserProtected(user, protected)
     if user then
-        return {true, exports.pdo:update(tableName, {protected = protected}, {id = user.id})}
+        return {true, exports.sql:update(tableName, {protected = protected}, {id = user.id})}
     end
     return {false, "Invalid arguments"}
 end
 
 function getUserById(id)
-    return exports.pdo:select(tableName, "*", {id = id})[1]
+    return exports.sql:select(tableName, "*", {id = id})[1]
 end
 
 function getUserByUsername(username)
-    return exports.pdo:select(tableName, "*", {username = username})[1]
+    return exports.sql:select(tableName, "*", {username = username})[1]
 end
 
 function getUserByEmail(email)
-    return exports.pdo:select(tableName, "*", {email = email})[1]
+    return exports.sql:select(tableName, "*", {email = email})[1]
 end
 
 function getUserByNickname(nickname)
-    return exports.pdo:select(tableName, "*", {nickname = nickname})[1]
+    return exports.sql:select(tableName, "*", {nickname = nickname})[1]
 end
 
 function getUserUsername(id)
