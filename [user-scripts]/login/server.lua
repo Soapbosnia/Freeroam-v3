@@ -1,22 +1,30 @@
 local function attemptLogin(username, password)
     local user = exports.users:getUserByUsername(username)
-
-    if user then
-        local actualPassword = exports.users:getUserPassword(user.id)
-
-        if (md5(password) == actualPassword) then
-            triggerEvent("onUserLogin", source, source, user)
-            triggerClientEvent(source, "hideLoginSections", source)
-            setElementData(source, "logged-in", true)
-            exports.spawner:loadPlayer(source)
-        end
+    if (not user) then
+        return
     end
+    local actualPassword = user.password
+    if (md5(password) ~= actualPassword) then
+        return
+    end
+    triggerEvent("onUserLogin", source, source, user)
+    triggerClientEvent(source, "hideLoginSections", source)
+    setElementData(source, "logged-in", true)
+    exports.spawner:loadPlayer(source)
 end
 addEvent("attemptLogin", true)
 addEventHandler("attemptLogin", root, attemptLogin)
 
 local function attemptRegister(username, password, email, nickname)
-    -- TODO: Check if username, email, or nickname is already taken
+    if exports.users:getUserByUsername(username) then
+        return
+    end
+    if exports.users:getUserByEmail(email) then
+        return
+    end
+    if exports.users:getUserByNickname(nickname) then
+        return
+    end
     local rank = {id = 1}
     local serials = {{serial = getPlayerSerial(source), default = true}}
     local ips = {{ip = getPlayerIP(source), default = true}}
