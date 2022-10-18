@@ -26,3 +26,13 @@ local function attemptRegister(username, password, email, nickname)
 end
 addEvent("attemptRegister", true)
 addEventHandler("attemptRegister", root, attemptRegister)
+
+local function attemptLogout(command)
+    if (command == "logout") then
+        setElementData(source, "logged-in", nil)
+        triggerEvent("onUserLogout", source, source)
+        triggerClientEvent(source, "showLoginPanel", source)
+        outputChatBox("You have been logged out.", source, 255, 255, 255)
+    end
+end
+addEventHandler("onPlayerCommand", root, attemptLogout)

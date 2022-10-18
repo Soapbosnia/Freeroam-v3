@@ -144,11 +144,14 @@ end
 ---------------
 local function onStart()
     if (not getElementData(localPlayer, "logged-in")) then
+        fadeCamera(false)
         toggleSection("login", true)
         showCursor(true)
         addEventHandler("onClientRender", root, renderServerBanner)
     end
 end
+addEvent("showLoginPanel", true)
+addEventHandler("showLoginPanel", root, onStart)
 addEventHandler("onClientResourceStart", resourceRoot, onStart)
 toggleSection("login", false)
 toggleSection("register", false)
