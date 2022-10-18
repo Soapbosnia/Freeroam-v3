@@ -19,9 +19,9 @@ local connection = dbConnect(
 function generateWhereClause(data)
     local where=""
     local values={}
-    for k,v in pairs(data) do
-        where=where.."`"..k.."` = ? AND "
-        table.insert(values, v)
+    for k,v in ipairs(data) do
+        where=where.."`"..v[1].."` = ? AND "
+        table.insert(values, v[2])
     end
     return where:sub(1,-6),values
 end
@@ -29,9 +29,9 @@ end
 function generateSetClause(data)
     local set=""
     local values={}
-    for k,v in pairs(data) do
-        set=set.."`"..k.."` = ?, "
-        table.insert(values, v)
+    for k,v in ipairs(data) do
+        set=set.."`"..v[1].."` = ?, "
+        table.insert(values, v[2])
     end
     return set:sub(1,-3),values
 end
@@ -80,13 +80,6 @@ function select(table, select, where)
     if(#values > 0) then
         query = query.." WHERE "..where
     end
-    return dbPoll(dbQuery(connection,query,unpack(values)),-1)
-end
-
-function selectJoin(table1, table2, joinType, fields, select, where)
-    local select=select or "*"
-    local where,values=generateWhereClause(where)
-    local query="SELECT `"..select.."` FROM `".. table1.."` "..joinType.." `"..table2.."` ON `"..table1.."`.`"..fields[1].."` = `"..table2.."`.`"..fields[2].."` WHERE "..where
     return dbPoll(dbQuery(connection,query,unpack(values)),-1)
 end
 
