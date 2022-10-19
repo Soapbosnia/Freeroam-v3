@@ -5,7 +5,7 @@
     <script src="main.lua" type="server" />
     <script src="player.lua" type="server" />
 
-    <include resource="pdo" />
+    <include resource="sql" />
 
     <!-- Base -->
     <export function="setUserUsername" type="server" />

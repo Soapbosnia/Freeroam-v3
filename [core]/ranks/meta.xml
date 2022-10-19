@@ -3,7 +3,7 @@
     <script src="base.lua" type="server" />
     <script src="main.lua" type="server" />
 
-    <include resource="pdo" />
+    <include resource="sql" />
 
     <!-- Base -->
     <export function="setRankPosition" type="server" />
